@@ -2,15 +2,21 @@ import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 
-const filter = createFilterOptions<FilmOptionType>();
+const filter = createFilterOptions<OptionType>();
 
 interface Props {
   heading: string;
   label: string;
+  options: readonly OptionType[];
 }
 
-function FilterSearch({ heading, label }: Props) {
-  const [value, setValue] = React.useState<FilmOptionType | null>(null);
+interface OptionType {
+  inputValue?: string;
+  title: string;
+}
+
+function FilterSearch({ heading, label, options }: Props) {
+  const [value, setValue] = React.useState<OptionType | null>(null);
 
   return (
     <Autocomplete
@@ -50,7 +56,7 @@ function FilterSearch({ heading, label }: Props) {
       clearOnBlur
       handleHomeEndKeys
       id="free-solo-with-text-demo"
-      options={top100Films}
+      options={options}
       getOptionLabel={(option) => {
         // Value selected with enter, right from the input
         if (typeof option === "string") {
@@ -75,20 +81,5 @@ function FilterSearch({ heading, label }: Props) {
     />
   );
 }
-
-interface FilmOptionType {
-  inputValue?: string;
-  title: string;
-}
-
-// Top 100 films as rated by IMDb users. http://www.imdb.com/chart/top
-const top100Films: readonly FilmOptionType[] = [
-  { title: "CS 1110" },
-  { title: "CS 2110" },
-  { title: "CS 2800" },
-  { title: "CS 3110" },
-  { title: "CS 3410" },
-  { title: "CS 4820" },
-];
 
 export default FilterSearch;

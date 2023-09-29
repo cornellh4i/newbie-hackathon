@@ -24,12 +24,27 @@ function FilterMenu() {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent>
-        <FilterSearch heading={"Search Posts"} label={"Search"} />
-        <FilterSearch heading={"Course"} label={"Course Number"} />
+        <FilterSearch
+          heading={"Search Posts"}
+          label={"Search"}
+          options={[{ title: "Example Post (default sorted by most recent)" }]}
+        />
+        <FilterSearch
+          heading={"Course"}
+          label={"Course Number"}
+          options={[
+            { title: "CS 1110" },
+            { title: "CS 2110" },
+            { title: "CS 2800" },
+            { title: "CS 3110" },
+            { title: "CS 3410" },
+            { title: "CS 4820" },
+          ]}
+        />
 
         <FilterCollege heading={"College"} labels={collegeLabels} />
 
-        <FilterToggle />
+        <FilterToggle heading={"Student Level"} />
       </CardContent>
     </Card>
   );
