@@ -7,7 +7,7 @@ interface IPost extends Document {
   comments : string[],
   upvotes : number, 
   course : string,
-  id : string
+  _id : string
 }
 
 const PostSchema : Schema = new Schema({
@@ -16,9 +16,10 @@ const PostSchema : Schema = new Schema({
   comments : {type: [String]}, 
   upvotes : {type : Number, default : 0}, 
   course : {type : String}, 
-  id : {type : String}
+  _id : {type : String}
 });
 
 const Post = model('Post', PostSchema);
 
 export default Post;
+export { IPost }

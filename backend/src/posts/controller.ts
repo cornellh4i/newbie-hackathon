@@ -3,6 +3,7 @@ import e from "express";
 import { Db, MongoClient as MC, MongoError } from "mongodb";
 import { Callback } from "mongoose";
 import { cursorTo } from "readline";
+import Post, { IPost } from "./models"
 
 const { MongoClient } = require("mongodb");
 const DEV_URI = process.env.DEV_URI;
@@ -25,4 +26,19 @@ const get_all_posts = async () => {
       }
 }
 
-export default { get_all_posts };
+const add_post = async (post : IPost) => {
+  try {
+    const database = client.db('Posts');
+    const posts = database.collection('Posts');
+    console.log("got here");
+    const newPost = new Post(post);
+    const addPost = posts.insertOne(newPost);
+    return addPost; 
+  } catch (error) {
+    throw error;
+  } finally {
+    await client.close();
+  }
+}
+
+export default { get_all_posts, add_post };
