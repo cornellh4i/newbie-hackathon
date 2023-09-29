@@ -3,7 +3,7 @@ import mongoose, { model, Schema, Model, Document } from 'mongoose';
 
 interface IPost extends Document {
   title : string,
-  information : string,
+  postText : string,
   comments : string[],
   upvotes : number, 
   course : string,
@@ -12,7 +12,7 @@ interface IPost extends Document {
 
 const PostSchema : Schema = new Schema({
   title : {type : String, required : true}, 
-  information : {type : String, required : true}, 
+  postText : {type : String, required : true}, 
   comments : {type: [String]}, 
   upvotes : {type : Number, default : 0}, 
   course : {type : String}, 
