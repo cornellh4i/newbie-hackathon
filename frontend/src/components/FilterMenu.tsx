@@ -8,6 +8,7 @@ import CardContent from "@mui/material/CardContent";
 import FilterSearch from "../components/FilterSearch";
 import FilterCollege from "../components/FilterCollege";
 import FilterToggle from "../components/FilterToggle";
+import "./FilterMenu.css";
 
 function FilterMenu() {
   const collegeLabels = [
@@ -23,7 +24,13 @@ function FilterMenu() {
 
   return (
     <Card sx={{ minWidth: 275 }}>
-      <CardContent>
+      <CardContent
+        className="filter-card"
+        sx={{
+          padding: "24px",
+        }}
+      >
+        <h2 className="filter-header">Filter</h2>
         <FilterSearch
           heading={"Search Posts"}
           label={"Search"}

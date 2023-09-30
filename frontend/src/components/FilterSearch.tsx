@@ -1,6 +1,7 @@
 import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
+import "./FilterMenu.css";
 
 const filter = createFilterOptions<OptionType>();
 
@@ -73,10 +74,12 @@ function FilterSearch({ heading, label, options }: Props) {
       sx={{ width: 300 }}
       freeSolo
       renderInput={(params) => (
-        <>
-          <h3>{heading}</h3>
-          <TextField {...params} label={label} />
-        </>
+        <div className="search-container">
+          <h3 className="search-header">{heading}</h3>
+          <TextField {...params} label={label} className="search-textfield">
+            TODO: insert search symbol
+          </TextField>
+        </div>
       )}
     />
   );

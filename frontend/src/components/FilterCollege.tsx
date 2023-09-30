@@ -2,6 +2,7 @@ import React from "react";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
+import "./FilterMenu.css";
 
 interface Props {
   heading: string;
@@ -12,7 +13,7 @@ export default function CheckboxLabels({ labels, heading }: Props) {
   const containerStyle = {
     display: "grid",
     gridTemplateColumns: "repeat(3, 1fr)", // 3 columns
-    gap: "16px", // Adjust the gap as needed
+    // gap: "16px", // Adjust the gap as needed
   };
 
   return (
