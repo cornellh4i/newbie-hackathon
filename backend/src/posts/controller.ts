@@ -24,7 +24,23 @@ const get_all_posts = async () => {
     // Ensures that the client will close when you finish/error
     await client.close();
   }
-};
+
+}
+
+const increase_upvote = async (id: string) => {
+  try {
+    const database = client.db('Posts');
+    const posts = database.collection('Posts');
+    const result = await posts.findOneAndUpdate(
+      { "_id": id },
+      { $inc: { "upvotes": 1 } },
+    )
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+
 
 const post_comment = async (id: string, comment: string) => {
   try {
@@ -80,4 +96,5 @@ const get_posts_by_course = async (course: string) => {
       }
 };
 
-export default { get_all_posts, get_post_by_id, get_posts_by_course };
+export default { get_all_posts, get_post_by_id, get_posts_by_course, post_comment, increase_upvote };
+
