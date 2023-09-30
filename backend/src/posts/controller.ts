@@ -1,8 +1,9 @@
 // Controllers here, following the pattern in ../customers/controllers.ts
 import e from "express";
 import { Db, MongoClient as MC, MongoError } from "mongodb";
-import { Callback } from "mongoose";
+import { Callback, model } from "mongoose";
 import { cursorTo } from "readline";
+import Post, { IPost } from './models'
 
 const { MongoClient } = require("mongodb");
 const DEV_URI = process.env.DEV_URI;
@@ -13,16 +14,42 @@ const client = new MongoClient(DEV_URI, {
 
 
 const get_all_posts = async () => {
-    try {
-        const database = client.db('Posts');
-        const posts = database.collection('Posts');
-        const query = { }
-        const all_posts = await posts.find(query).toArray()
-        return all_posts
-      } finally {
-        // Ensures that the client will close when you finish/error
-        await client.close();
-      }
+  try {
+    const database = client.db('Posts');
+    const posts = database.collection('Posts');
+    const query = {}
+    const all_posts = await posts.find(query).toArray()
+    return all_posts
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
 }
 
-export default { get_all_posts };
+const post_comment = async (id: string, comment: string) => {
+  try {
+    const database = client.db('Posts');
+    const posts = database.collection('Posts');
+    const query = { "_id": id };
+
+    // Define the update operation
+    const updateOperation = {
+      $push: { "comments": comment },
+    };
+
+    // Perform the update operation with options
+    const result = await posts.findOneAndUpdate(query, updateOperation);
+    if (result.value) {
+      // The post was found and updated successfully
+      return result.value;
+    } else {
+      // Handle the case where the post with the given ID was not found
+      throw new Error('Post not found');
+    }
+  } finally {
+    // Ensure that the client will close when you finish/error
+    await client.close();
+  }
+};
+
+export default { get_all_posts, post_comment };
