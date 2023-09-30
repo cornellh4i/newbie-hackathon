@@ -22,4 +22,5 @@ const PostSchema: Schema = new Schema({
 const Post = model('Post', PostSchema);
 
 export default Post;
+
 export { IPost };
