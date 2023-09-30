@@ -8,6 +8,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import AdbIcon from '@mui/icons-material/Adb';
+import { useNavigate } from 'react-router-dom';
 
 const styles = {
   container: {
@@ -25,14 +26,19 @@ const styles = {
   },
 };
 
-function PostButton() {
+
+export default function PostButton() {
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate('/createpost');
+  };
+
   return (
     <Container sx={styles.container}>
-      <Button variant="contained" sx={styles.button}>
+      <Button onClick={handleNavigate} variant="contained" sx={styles.button}>
         Post
       </Button>
     </Container>
   );
 }
-
-export default PostButton;

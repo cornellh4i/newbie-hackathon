@@ -22,8 +22,6 @@ export default function CreatePostPage() {
       window.alert('Please fill in all fields');
       return;
     }
-    // Add your createPost function here if needed
-    // createPost(title, postText, comments, upvotes, course);
     navigate('/');
   };
 
