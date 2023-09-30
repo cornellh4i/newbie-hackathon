@@ -82,20 +82,18 @@ const get_posts_by_course = async (course: string) => {
 
 const get_posts_by_search = async (search: string) => {
     try {
-        const database = client.db('Posts');
-        const collection = database.collection('Posts');
         const all_posts = await get_all_posts()
         console.log(all_posts)
 
         const searchTextLowered = search.toLowerCase();
         const searchable_posts = all_posts.map((post: any) => {
             const title: string = post["title"].toLowerCase();
-            if (title.indexOf(searchTextLowered)) {
+            console.log(title);
+            if (title.indexOf(searchTextLowered) >= 0) {
                 return post;
             }
           });
-        console.log(searchable_posts)
-        return searchable_posts;
+        return searchable_posts.filter((value : any) => value !== undefined);
       } finally {
         await client.close();
       }
