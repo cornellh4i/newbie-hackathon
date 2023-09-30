@@ -7,58 +7,71 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { blue } from '@mui/material/colors';
 import CommentIcon from '@mui/icons-material/Comment';
-import CardHeader from '@mui/material/CardHeader';
+import postRouter from '../../../backend/src/posts/views';
+import { useEffect, useState } from 'react';
+import Post, { IPost } from '../../../backend/src/posts/models';
 
 
-const PostCard = ({ username, title, question, course, rank, comments }:
-  { username: string, title: string, question: string, course: string, rank: number, comments: string[] }) => {
+const PostCards = () => {
+  const [postCards, setPosts] = useState([]);
+
+  useEffect(() => {
+
+    postRouter.get((res: any) => setPosts(res));
+  }, []);
+
   return (
-    <Box display="flex" sx={{ justifyContent: "center" }} border={10} borderColor="transparent">
-      <Card sx={{ maxWidth: 800 }}>
+    <>
+      {
+        postCards.map((PostCard: IPost) => (
+          <Box display="flex" sx={{ justifyContent: "center" }} border={10} borderColor="transparent">
+            <Card sx={{ maxWidth: 800 }}>
 
-        <CardContent>
-          {
-            <Avatar sx={{ bgcolor: blue[500] }} aria-label="user"></Avatar>
-          }
-          <Box display="flex" sx={{ justifyContent: "left" }} borderColor="transparent" paddingTop={1}>
-            {username} r/{course}
+              <CardContent>
+                {
+                  <Avatar sx={{ bgcolor: blue[500] }} aria-label="user"></Avatar>
+                }
+                <Box display="flex" sx={{ justifyContent: "left" }} borderColor="transparent" paddingTop={1}>
+                  {PostCard.id}
+                </Box>
+                <CardActions sx={{ justifyContent: "right" }}>
+                  <IconButton aria-label="votes">
+                    <ArrowUpwardIcon />
+                    <Box paddingLeft={1} paddingRight={1} >
+                      <Typography color="black">
+                        {PostCard.upvotes}
+                      </Typography>
+                    </Box>
+                    <ArrowDownwardIcon />
+                  </IconButton>
+                </CardActions>
+                <Box display="flex" paddingLeft={2.5} paddingBottom={0.5}>
+                  <Typography variant="body1" align='left'>
+                    {PostCard.title}
+                  </Typography>
+                </Box>
+                <Box display="flex" paddingLeft={2.5}>
+                  <Typography variant="body2" color="text.secondary" align='left'>
+                    {PostCard.postText}
+                  </Typography>
+                </Box>
+                <CardActions sx={{ justifyContent: "left" }}>
+                  <IconButton aria-label="comment">
+                    <CommentIcon />
+                    <Box paddingLeft={1} paddingRight={1} >
+                      <Typography >
+                        {PostCard.comments.length} comments
+                      </Typography>
+                    </Box>
+                  </IconButton>
+                </CardActions>
+              </CardContent>
+            </Card>
           </Box>
-          <CardActions sx={{ justifyContent: "right" }}>
-            <IconButton aria-label="votes">
-              <ArrowUpwardIcon />
-              <Box paddingLeft={1} paddingRight={1} >
-                <Typography color="black">
-                  {rank}
-                </Typography>
-              </Box>
-              <ArrowDownwardIcon />
-            </IconButton>
-          </CardActions>
-          <Box display="flex" paddingLeft={2.5} paddingBottom={0.5}>
-            <Typography variant="body1" align='left'>
-              {title}
-            </Typography>
-          </Box>
-          <Box display="flex" paddingLeft={2.5}>
-            <Typography variant="body2" color="text.secondary" align='left'>
-              {question}
-            </Typography>
-          </Box>
-          <CardActions sx={{ justifyContent: "left" }}>
-            <IconButton aria-label="comment">
-              <CommentIcon />
-              <Box paddingLeft={1} paddingRight={1} >
-                <Typography >
-                  {comments.length} comments
-                </Typography>
-              </Box>
-            </IconButton>
-          </CardActions>
-        </CardContent>
-
-
-      </Card>
-    </Box>
+        ))
+      }
+    </>
   );
 }
-export default PostCard
+
+export default PostCards
