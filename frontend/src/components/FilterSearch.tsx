@@ -76,7 +76,15 @@ function FilterSearch({ heading, label, options }: Props) {
       renderInput={(params) => (
         <div className="search-container">
           <h3 className="search-header">{heading}</h3>
-          <TextField {...params} label={label} className="search-textfield">
+          <TextField
+            {...params}
+            label={label}
+            sx={{
+              "& .MuiInputBase-root-MuiOutlinedInput-root": {
+                borderColor: "red",
+              },
+            }}
+          >
             TODO: insert search symbol
           </TextField>
         </div>
