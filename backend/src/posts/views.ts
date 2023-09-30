@@ -23,4 +23,10 @@ postRouter.get(
     attempt(res, 200, () => postsController.get_posts_by_course(course));
   });
 
+  postRouter.get("/search/:text", async (req: Request, res: Response) => {
+    // #swagger.tags = ['Users']
+    const search = req.params.text.replace("+", " ");
+    attempt(res, 200, () => postsController.get_posts_by_search(search));
+  });
+
 export default postRouter;

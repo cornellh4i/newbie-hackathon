@@ -53,4 +53,25 @@ const get_posts_by_course = async (course: string) => {
       }
 }
 
-export default { get_all_posts, get_post_by_id, get_posts_by_course };
+const get_posts_by_search = async (search: string) => {
+    try {
+        const database = client.db('Posts');
+        const collection = database.collection('Posts');
+        const all_posts = await get_all_posts()
+        console.log(all_posts)
+
+        const searchTextLowered = search.toLowerCase();
+        const searchable_posts = all_posts.map((post: any) => {
+            const title: string = post["title"].toLowerCase();
+            if (title.indexOf(searchTextLowered)) {
+                return post;
+            }
+          });
+        console.log(searchable_posts)
+        return searchable_posts;
+      } finally {
+        await client.close();
+      }
+}
+
+export default { get_all_posts, get_post_by_id, get_posts_by_course, get_posts_by_search };
