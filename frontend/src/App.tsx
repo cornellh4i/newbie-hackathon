@@ -4,6 +4,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import PostCard from './components/PostCard';
 
+
 function App() {
   return (
     <div className="App">
@@ -12,6 +13,7 @@ function App() {
       layout 2 of lab 5, is it okay if the orange <hi> element ( with text 
       'Layout2') changes width as you change the screen size? Or does it have 
       to be fixed as shown in the video?" course="CS1110" rank={5} comments={["hi", "hi"]} />
+
     </div>
   );
 }
