@@ -42,6 +42,21 @@ const increase_upvote = async (id: string) => {
   }
 }
 
+const decrease_upvote = async (id: string) => {
+  try {
+    const database = client.db('Posts');
+    const posts = database.collection('Posts');
+    const result = await posts.findOneAndUpdate(
+      { "_id": id },
+      { $inc: { "upvotes": -1 } },
+    )
+    console.log(result)
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+
 
 const post_comment = async (id: string, comment: string) => {
   try {
@@ -70,59 +85,59 @@ const post_comment = async (id: string, comment: string) => {
 };
 
 const get_post_by_id = async (id: string) => {
-    try {
-        const database = client.db('Posts');
-        const posts = database.collection('Posts');
-        const query = { "_id": id }
-        const response = await posts.find(query).toArray()
-        const post = new Post(response[0])
-        return post
-      } finally {
-        await client.close();
-      }
+  try {
+    const database = client.db('Posts');
+    const posts = database.collection('Posts');
+    const query = { "_id": id }
+    const response = await posts.find(query).toArray()
+    const post = new Post(response[0])
+    return post
+  } finally {
+    await client.close();
+  }
 };
 
 const get_posts_by_course = async (course: string) => {
-    try {
-        const database = client.db('Posts');
-        const collection = database.collection('Posts');
-        const query = { "course": course }
-        const response = await collection.find(query).toArray()
-        const posts = response.map((element: any) => {
-            return new Post(element);
-          });
-        return posts
-      } finally {
-        await client.close();
-      }
+  try {
+    const database = client.db('Posts');
+    const collection = database.collection('Posts');
+    const query = { "course": course }
+    const response = await collection.find(query).toArray()
+    const posts = response.map((element: any) => {
+      return new Post(element);
+    });
+    return posts
+  } finally {
+    await client.close();
+  }
 };
 
 const get_posts_by_search = async (search: string) => {
-    try {
-        const all_posts = await get_all_posts()
-        console.log(all_posts)
+  try {
+    const all_posts = await get_all_posts()
+    console.log(all_posts)
 
-        const searchTextLowered = search.toLowerCase();
-        const searchable_posts = all_posts.map((post: any) => {
-            const title: string = post["title"].toLowerCase();
-            console.log(title);
-            if (title.indexOf(searchTextLowered) >= 0) {
-                return post;
-            }
-          });
-        return searchable_posts.filter((value : any) => value !== undefined);
-      } finally {
-        await client.close();
+    const searchTextLowered = search.toLowerCase();
+    const searchable_posts = all_posts.map((post: any) => {
+      const title: string = post["title"].toLowerCase();
+      console.log(title);
+      if (title.indexOf(searchTextLowered) >= 0) {
+        return post;
       }
+    });
+    return searchable_posts.filter((value: any) => value !== undefined);
+  } finally {
+    await client.close();
+  }
 }
 
-const add_post = async (post : IPost) => {
+const add_post = async (post: IPost) => {
   try {
     const database = client.db('Posts');
     const posts = database.collection('Posts');
     const newPost = new Post(post);
     const addPost = posts.insertOne(newPost);
-    return addPost; 
+    return addPost;
   } catch (error) {
     throw error;
   } finally {
@@ -134,9 +149,9 @@ const delete_post = async (postId: string) => {
   try {
     const database = client.db('Posts');
     const posts = database.collection('Posts');
-    
+
     const deleteResult = await posts.deleteOne({ _id: postId });
-    
+
     if (deleteResult.deletedCount === 1) {
       return true;
     } else {
@@ -150,4 +165,4 @@ const delete_post = async (postId: string) => {
 }
 
 
-export default { get_all_posts, add_post, get_post_by_id, get_posts_by_course, delete_post, post_comment, increase_upvote, get_posts_by_search };
+export default { get_all_posts, add_post, get_post_by_id, get_posts_by_course, delete_post, post_comment, increase_upvote, decrease_upvote, get_posts_by_search };
