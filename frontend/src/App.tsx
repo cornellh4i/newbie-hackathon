@@ -3,13 +3,19 @@ import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar';
 import PostButton from './components/PostButton';
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import CreatePostPage from './pages/CreatePostPage';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
-      <PostButton />
-
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<HomePage />} />
+          <Route path='/createpost' element={<CreatePostPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
