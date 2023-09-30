@@ -25,12 +25,6 @@ function App() {
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Inter:400,700&display=swap"
       />
-      <Navbar />
-      <FilterMenu />
-      <PostCard username="Username" title="Lab 5 Question" question="for the 
-      layout 2 of lab 5, is it okay if the orange <hi> element ( with text 
-      'Layout2') changes width as you change the screen size? Or does it have 
-      to be fixed as shown in the video?" course="CS1110" rank={5} comments={["hi", "hi"]} />
     </div>
   );
 }
