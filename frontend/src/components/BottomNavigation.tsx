@@ -119,9 +119,9 @@ export default function SimpleContainer() {
                   />
                   <Divider orientation='vertical' flexItem />
                   <Button
-                    color="primary"
+                    style={{ color: 'gray' }}
                     variant="text"
-                  >Subscribe</Button>
+                  ><b>Subscribe</b></Button>
                 </Stack>
               </Box>
               <Box sx={{ fontSize: '12px', color: '#A6ADBD' }}>
