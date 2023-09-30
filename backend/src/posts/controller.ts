@@ -3,7 +3,8 @@ import e from "express";
 import { Db, MongoClient as MC, MongoError } from "mongodb";
 import { Callback, model } from "mongoose";
 import { cursorTo } from "readline";
-import Post, { IPost } from "./models";
+import Post, { IPost } from "./models"
+
 
 const { MongoClient } = require("mongodb");
 const DEV_URI = process.env.DEV_URI;
@@ -96,5 +97,57 @@ const get_posts_by_course = async (course: string) => {
       }
 };
 
-export default { get_all_posts, get_post_by_id, get_posts_by_course, post_comment, increase_upvote };
+const get_posts_by_search = async (search: string) => {
+    try {
+        const all_posts = await get_all_posts()
+        console.log(all_posts)
 
+        const searchTextLowered = search.toLowerCase();
+        const searchable_posts = all_posts.map((post: any) => {
+            const title: string = post["title"].toLowerCase();
+            console.log(title);
+            if (title.indexOf(searchTextLowered) >= 0) {
+                return post;
+            }
+          });
+        return searchable_posts.filter((value : any) => value !== undefined);
+      } finally {
+        await client.close();
+      }
+}
+
+const add_post = async (post : IPost) => {
+  try {
+    const database = client.db('Posts');
+    const posts = database.collection('Posts');
+    const newPost = new Post(post);
+    const addPost = posts.insertOne(newPost);
+    return addPost; 
+  } catch (error) {
+    throw error;
+  } finally {
+    await client.close();
+  }
+}
+
+const delete_post = async (postId: string) => {
+  try {
+    const database = client.db('Posts');
+    const posts = database.collection('Posts');
+    
+    const deleteResult = await posts.deleteOne({ _id: postId });
+    
+    if (deleteResult.deletedCount === 1) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    throw error;
+  } finally {
+    await client.close();
+  }
+}
+
+
+export default { get_all_posts, add_post, get_post_by_id, get_posts_by_course, delete_post, post_comment, increase_upvote, get_posts_by_search };
