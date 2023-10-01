@@ -12,13 +12,13 @@ interface Props {
 export default function CheckboxLabels({ labels, heading }: Props) {
   const containerStyle = {
     display: "grid",
-    gridTemplateColumns: "repeat(3, 1fr)", // 3 columns
+    gridTemplateColumns: "repeat(3, 100px)", // 3 columns
     // gap: "16px", // Adjust the gap as needed
   };
 
   return (
     <>
-      <h3>{heading}</h3>
+      <h3 className="section-header">{heading}</h3>
       <FormGroup style={containerStyle}>
         {labels.map((label) => (
           <FormControlLabel key={label} control={<Checkbox />} label={label} />
