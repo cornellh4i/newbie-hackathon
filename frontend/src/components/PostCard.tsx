@@ -9,15 +9,24 @@ import { blue } from '@mui/material/colors';
 import CommentIcon from '@mui/icons-material/Comment';
 import postRouter from '../../../backend/src/posts/views';
 import { useEffect, useState } from 'react';
-import Post, { IPost } from '../../../backend/src/posts/models';
+import Post, { type IPost } from '../../../backend/src/posts/models';
 
 
 const PostCards = () => {
   const [postCards, setPosts] = useState([]);
 
   useEffect(() => {
-
-    postRouter.get((res: any) => setPosts(res));
+    const get_all_posts = async () => {
+      const baseURL = `http://localhost:8000/posts/all`
+      try {
+        const response = await fetch(baseURL, { method: "GET" })
+        const all_posts = await response.json()
+        setPosts(all_posts);
+      }
+      catch (err) {
+        throw new Error(`Unknown Error`)
+      }
+    }
   }, []);
 
   return (

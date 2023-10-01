@@ -28,5 +28,8 @@
     "build": "tsc",
     "test": "jest",
     "swagger": "ts-node -r dotenv/config src/swagger.ts"
+  },
+  "devDependencies": {
+    "@types/mongoose": "^5.11.97"
   }
 }
