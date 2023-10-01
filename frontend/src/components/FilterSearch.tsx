@@ -75,14 +75,23 @@ function FilterSearch({ heading, label, options }: Props) {
       freeSolo
       renderInput={(params) => (
         <div className="search-container">
-          <h3 className="search-header">{heading}</h3>
+          <h3 className="section-header">{heading}</h3>
           <TextField
             {...params}
             label={label}
             sx={{
-              "& .MuiInputBase-root-MuiOutlinedInput-root": {
-                borderColor: "red",
+              "& .MuiOutlinedInput-root": {
+                backgroundColor: "#EFEFEF",
+                margin: "0 0 16px 0",
+                padding: "12px 24px 12px 24px",
               },
+              "& .MuiAutocomplete-root": {
+                width: "313px",
+              },
+              "& .MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input":
+                {
+                  padding: "0px 0px 0px 0px",
+                },
             }}
           >
             TODO: insert search symbol
