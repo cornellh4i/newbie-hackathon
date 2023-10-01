@@ -14,7 +14,6 @@ export default function CreatePostPage() {
   const [title, setTitle] = useState('');
   const [postText, setPostText] = useState('');
   const [course, setCourse] = useState('');
-
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
@@ -25,22 +24,23 @@ export default function CreatePostPage() {
     navigate('/');
 
     const baseURL = "http://localhost:8000/posts/addpost"
+
     try {
       const reqbody = {
         "title": title,
         "postText": postText,
-        "comments": [],
+        "comments": ["hey"],
         "upvotes": 0,
         "course": course,
-        "id": 1
-
+        "id": ""
       }
+      console.log("before")
       const response = await fetch(baseURL, {
         body: JSON.stringify(reqbody),
         headers: { "Content-type": "application/json" },
         method: "POST"
       })
-      const responseStatus = await response.json()
+
     }
     catch (error) {
       console.log(error)

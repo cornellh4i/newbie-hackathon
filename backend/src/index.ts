@@ -21,16 +21,16 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(spec));
 app.use("/posts", postRouter);
 
 
-/**
- * Some dummy routes to illustrate express syntax
- */
-app.get("/", function (req, res) {
-  res.send("Hello World!");
-});
+// /**
+//  * Some dummy routes to illustrate express syntax
+//  */
+// app.get("/", function (req, res) {
+//   res.send("Hello World!");
+// });
 
-app.post("/", (req, res) => {
-  res.send(req.body);
-});
+// app.post("/", (req, res) => {
+//   res.send(req.body);
+// });
 
 app.listen(process.env.PORT || 8000, async () => {
   console.log("✅ Server is up and running");

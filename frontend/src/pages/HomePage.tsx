@@ -12,6 +12,7 @@ export default function HomePage() {
       <Navbar />
       <PostButton />
       <FilterMenu />
+      <PostCard />
     </div>
   );
 }

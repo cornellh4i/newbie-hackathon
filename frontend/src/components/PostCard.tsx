@@ -10,31 +10,42 @@ import { blue } from '@mui/material/colors';
 import CommentIcon from '@mui/icons-material/Comment';
 import postRouter from '../../../backend/src/posts/views';
 import { useEffect, useState } from 'react';
-import Post, { type IPost } from '../../../backend/src/posts/models';
 
 
 const PostCards = () => {
-  const [postCards, setPosts] = useState([]);
+  const [postCards, setPosts] = useState([{
+    "title": "",
+    "postText": '',
+    "comments": [],
+    "upvotes": 0,
+    "course": ''
+  }]);
 
   useEffect(() => {
     const get_all_posts = async () => {
       const baseURL = `http://localhost:8000/posts/all`
       try {
-        const response = await fetch(baseURL, { method: "GET" })
+        console.log('before fetch')
+        const response = await fetch(baseURL, { headers: { "Content-type": "application/json" }, method: "GET" })
         const all_posts = await response.json()
-        setPosts(all_posts);
+        console.log("after fetch")
+        setPosts(all_posts.data);
+        console.log(all_posts)
+        console.log(postCards)
       }
       catch (err) {
         throw new Error(`Unknown Error`)
       }
     }
+    get_all_posts()
   }, []);
+
 
   return (
     <>
       {
-        postCards.map((PostCard: IPost) => (
-          <Box display="flex" sx={{ justifyContent: "center" }} border={10} borderColor="transparent">
+        postCards.map((PostCard, index) => (
+          <Box key={index} display="flex" sx={{ justifyContent: "center" }} border={10} borderColor="transparent">
             <Card sx={{ maxWidth: 800 }}>
 
               <CardContent>
@@ -42,7 +53,7 @@ const PostCards = () => {
                   <Avatar sx={{ bgcolor: blue[500] }} aria-label="user"></Avatar>
                 }
                 <Box display="flex" sx={{ justifyContent: "left" }} borderColor="transparent" paddingTop={1}>
-                  {PostCard.id}
+                  {"hey"}
                 </Box>
                 <CardActions sx={{ justifyContent: "right" }}>
                   <IconButton aria-label="votes">
