@@ -1,3 +1,4 @@
+import './BottomNavigation.css';
 import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
@@ -38,7 +39,12 @@ export default function SimpleContainer() {
                 spacing={2}
                 style={{ alignSelf: 'center' }}
               >
-                <img src={HomeworkForumLogo} className='Homework-Logo' alt='logo' height={254} width={145} />
+                <img
+                  src={HomeworkForumLogo}
+                  className='Homework-logo'
+                  width={145}
+                  height={254}
+                />
                 <Stack
                   spacing={2}
                   direction="column"
@@ -103,7 +109,8 @@ export default function SimpleContainer() {
                   border: 1,
                   borderRadius: 5,
                   alignContent: 'flex-align',
-                  alignItems: 'center'
+                  alignItems: 'center',
+                  textAlign: 'center'
                 }}
               >
                 <Stack
@@ -111,20 +118,42 @@ export default function SimpleContainer() {
                   direction="row"
                   justifyContent="center"
                   alignItems="center"
+                  height={79}
+                  divider={<Divider orientation='vertical' flexItem />}
                 >
                   <InputBase
-                    sx={{ ml: 1, flex: 1, alignContent: 'center' }}
+                    sx={{
+                      top: 0,
+                      left: 15,
+                      ml: 1,
+                      flex: 1,
+                      alignContent: 'center'
+                    }}
                     placeholder="Your email here"
                     inputProps={{ 'aria-label': 'email' }}
                   />
-                  <Divider orientation='vertical' flexItem />
+                  {/* <Divider
+                    orientation='vertical'
+                    flexItem
+                  /> */}
                   <Button
-                    style={{ color: 'gray' }}
+                    style={{
+                      top: 0,
+                      left: -10,
+                      color: 'gray'
+                    }}
                     variant="text"
-                  ><b>Subscribe</b></Button>
+                  >
+                    <b>Subscribe</b>
+                  </Button>
                 </Stack>
               </Box>
-              <Box sx={{ fontSize: '12px', color: '#A6ADBD' }}>
+              <Box
+                sx={{
+                  fontSize: '12px',
+                  color: '#A6ADBD'
+                }}
+              >
                 <FormGroup>
                   <FormControlLabel control={<Checkbox />} label="By checking this box, you agree to receiving company news and updates" />
                 </FormGroup>
