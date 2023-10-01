@@ -19,8 +19,8 @@ function ToggleButtons({ heading }: Props) {
   };
 
   return (
-    <>
-      <h3>{heading}</h3>
+    <div className="toggle-container">
+      <h3 className="section-header">{heading}</h3>
       <ToggleButtonGroup
         value={alignment}
         exclusive
@@ -47,7 +47,7 @@ function ToggleButtons({ heading }: Props) {
         </ToggleButton>
       ))} */}
       </ToggleButtonGroup>
-    </>
+    </div>
   );
 }
 
