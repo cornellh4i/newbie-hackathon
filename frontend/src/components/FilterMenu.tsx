@@ -22,6 +22,11 @@ function FilterMenu() {
     "Hotel",
   ];
 
+  const [filter, setFilter] = React.useState<string>("");
+  const search = ""
+
+  
+
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent
@@ -47,6 +52,7 @@ function FilterMenu() {
             { title: "CS 3410" },
             { title: "CS 4820" },
           ]}
+          setFilter={setFilter}
         />
 
         <FilterCollege heading={"College"} labels={collegeLabels} />
