@@ -1,0 +1,38 @@
+:root {
+  --primary-font: 'Inter';
+  --light-grey: '#A6ADBD';
+  --dark-grey: '#80889B';
+  --background-white: '#EFEFEF';
+}
+
+/* .Homework-logo {
+  alt: 'logo';
+  width: 145px;
+  height: 254px;
+  top: 68px;
+  left: 62px;
+} */
+
+/* .Subscription {
+  position: absolute;
+  width: 476px;
+  height: 79px;
+  top: 150px;
+  left: 980px;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+} */
+
+.Company-name {
+  font-family: var(--primary-font);
+  font-size: 20px;
+}
+
+.Tagline {
+  font-family: var(--primary-font);
+  font-size: 16px;
+}
