@@ -50,17 +50,11 @@ const PostCards = () => {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-      {postCards.map((PostCard, index) => (
+      {postCards.slice().reverse().map((PostCard, index) => (
         <Card key={index} sx={{ width: '100%', maxWidth: 800, marginBottom: 3, boxShadow: 4 }}>
           <CardContent>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
-              <div style={{ paddingTop: '5px' }}>
-                <Avatar sx={{ bgcolor: blue[500] }} aria-label="user"></Avatar>
-              </div>
-              <Box display="flex" sx={{ justifyContent: "left", paddingLeft: "10px", paddingTop: "15px" }}>
-                {"Anon"}
-              </Box>
-              <Typography variant="h4" align='left' sx={{ paddingLeft: "20px", paddingTop: "2px" }}>
+              <Typography variant="h5" align='left' sx={{ paddingLeft: "15px", paddingTop: "7px" }}>
                 {PostCard.title}
               </Typography>
               <div style={{ marginLeft: 'auto' }}>
@@ -78,11 +72,20 @@ const PostCards = () => {
               </div>
             </div>
 
-            <Box display="flex" paddingLeft={2.5}>
-              <Typography variant="body1" align='left'>
-                {PostCard.postText}
-              </Typography>
-            </Box>
+            <div style={{ display: 'flex', flexDirection: 'row', paddingLeft: "25px", marginTop: "-10px" }}>
+              <Avatar sx={{ bgcolor: blue[500], width: 24, height: 24 }} aria-label="user"></Avatar>
+              <Box display="flex" sx={{ justifyContent: "left", paddingLeft: "5px", paddingTop: "2px", marginBottom: "5px" }}>
+                {"Anon"}
+              </Box>
+            </div>
+
+            <div style={{ paddingTop: "10px" }}>
+              <Box display="flex" paddingLeft={2.5}>
+                <Typography variant="body1" align='left'>
+                  {PostCard.postText}
+                </Typography>
+              </Box>
+            </div>
             <CardActions sx={{ justifyContent: "left" }}>
               <IconButton aria-label="comment" onClick={handleComment}>
                 <CommentIcon />
