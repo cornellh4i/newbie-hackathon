@@ -36,10 +36,7 @@ const PostCards = () => {
         console.log('before fetch')
         const response = await fetch(baseURL, { headers: { "Content-type": "application/json" }, method: "GET" })
         const all_posts = await response.json()
-        console.log("after fetch")
         setPosts(all_posts.data);
-        console.log(all_posts)
-        console.log(postCards)
       }
       catch (err) {
         throw new Error(`Unknown Error`)
@@ -51,7 +48,7 @@ const PostCards = () => {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
       {postCards.slice().reverse().map((PostCard, index) => (
-        <Card key={index} sx={{ width: '100%', maxWidth: 800, marginBottom: 3, boxShadow: 4 }}>
+        <Card key={index} sx={{ width: '100%', maxWidth: 800, marginBottom: 3, boxShadow: 4, borderRadius: '20px' }}>
           <CardContent>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
               <Typography variant="h5" align='left' sx={{ paddingLeft: "15px", paddingTop: "7px" }}>
@@ -74,9 +71,12 @@ const PostCards = () => {
 
             <div style={{ display: 'flex', flexDirection: 'row', paddingLeft: "25px", marginTop: "-10px" }}>
               <Avatar sx={{ bgcolor: blue[500], width: 24, height: 24 }} aria-label="user"></Avatar>
-              <Box display="flex" sx={{ justifyContent: "left", paddingLeft: "5px", paddingTop: "2px", marginBottom: "5px" }}>
+              <Box display="flex" sx={{ justifyContent: "left", paddingLeft: "5px", paddingTop: "2px", marginBottom: "5px", marginRight: '10px' }}>
                 {"Anon"}
               </Box>
+              <Typography variant="body1" align='left'>
+                {"r/" + PostCard.course}
+              </Typography>
             </div>
 
             <div style={{ paddingTop: "10px" }}>
