@@ -1,28 +1,29 @@
 // import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import SimpleContainer from './components/BottomNavigation';
+import Navbar from './components/Navbar';
+import PostButton from './components/PostButton';
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import CreatePostPage from './pages/CreatePostPage';
+import HomePage from './pages/HomePage';
+
+import FilterMenu from "./components/FilterMenu";
+import "./components/FilterMenu.css";
+import PostCard from './components/PostCard';
 
 function App() {
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-      <div>
-        <SimpleContainer />
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<HomePage />} />
+          <Route path='/createpost' element={<CreatePostPage />} />
+        </Routes>
+      </BrowserRouter>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Inter:400,700&display=swap"
+      />
     </div>
   );
 }
