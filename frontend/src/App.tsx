@@ -1,5 +1,5 @@
-import React from 'react';
-import logo from './logo.svg';
+// import React from 'react';
+// import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar';
 import PostButton from './components/PostButton';
@@ -10,7 +10,6 @@ import HomePage from './pages/HomePage';
 import FilterMenu from "./components/FilterMenu";
 import "./components/FilterMenu.css";
 import PostCard from './components/PostCard';
-
 
 function App() {
   return (
