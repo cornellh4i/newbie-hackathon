@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage';
 import FilterMenu from "./components/FilterMenu";
 import "./components/FilterMenu.css";
 import PostCard from './components/PostCard';
+import CommentsPage from './pages/CommentsPage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route index element={<HomePage />} />
           <Route path='/createpost' element={<CreatePostPage />} />
+          <Route path='/comments' element={<CommentsPage />} />
         </Routes>
       </BrowserRouter>
       <link

@@ -1,7 +1,7 @@
-
-import Card from '@mui/material/Card'; import CardContent from '@mui/material/CardContent';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import { Avatar, Box, } from '@mui/material';
+import { Avatar, Box } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
@@ -10,16 +10,24 @@ import { blue } from '@mui/material/colors';
 import CommentIcon from '@mui/icons-material/Comment';
 import postRouter from '../../../backend/src/posts/views';
 import { useEffect, useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 
 const PostCards = () => {
-  const [postCards, setPosts] = useState([{
-    "title": "",
-    "postText": '',
-    "comments": [],
-    "upvotes": 0,
-    "course": ''
-  }]);
+
+  const navigate = useNavigate();
+  const [postCards, setPosts] = useState([
+    {
+      "title": "",
+      "postText": '',
+      "comments": [],
+      "upvotes": 0,
+      "course": ''
+    }
+  ]);
+
+  const handleComment = async () => {
+    navigate('/comments');
+  };
 
   useEffect(() => {
     const get_all_posts = async () => {
@@ -40,25 +48,26 @@ const PostCards = () => {
     get_all_posts()
   }, []);
 
-
   return (
-    <>
-      {
-        postCards.map((PostCard, index) => (
-          <Box key={index} display="flex" sx={{ justifyContent: "center" }} border={10} borderColor="transparent">
-            <Card sx={{ maxWidth: 800 }}>
-
-              <CardContent>
-                {
-                  <Avatar sx={{ bgcolor: blue[500] }} aria-label="user"></Avatar>
-                }
-                <Box display="flex" sx={{ justifyContent: "left" }} borderColor="transparent" paddingTop={1}>
-                  {"hey"}
-                </Box>
+    <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+      {postCards.map((PostCard, index) => (
+        <Card key={index} sx={{ width: '100%', maxWidth: 800, marginBottom: 3, boxShadow: 4 }}>
+          <CardContent>
+            <div style={{ display: 'flex', flexDirection: 'row' }}>
+              <div style={{ paddingTop: '5px' }}>
+                <Avatar sx={{ bgcolor: blue[500] }} aria-label="user"></Avatar>
+              </div>
+              <Box display="flex" sx={{ justifyContent: "left", paddingLeft: "10px", paddingTop: "15px" }}>
+                {"Anon"}
+              </Box>
+              <Typography variant="h4" align='left' sx={{ paddingLeft: "20px", paddingTop: "2px" }}>
+                {PostCard.title}
+              </Typography>
+              <div style={{ marginLeft: 'auto' }}>
                 <CardActions sx={{ justifyContent: "right" }}>
                   <IconButton aria-label="votes">
                     <ArrowUpwardIcon />
-                    <Box paddingLeft={1} paddingRight={1} >
+                    <Box paddingLeft={1} paddingRight={1}>
                       <Typography color="black">
                         {PostCard.upvotes}
                       </Typography>
@@ -66,33 +75,29 @@ const PostCards = () => {
                     <ArrowDownwardIcon />
                   </IconButton>
                 </CardActions>
-                <Box display="flex" paddingLeft={2.5} paddingBottom={0.5}>
-                  <Typography variant="body1" align='left'>
-                    {PostCard.title}
+              </div>
+            </div>
+
+            <Box display="flex" paddingLeft={2.5}>
+              <Typography variant="body1" align='left'>
+                {PostCard.postText}
+              </Typography>
+            </Box>
+            <CardActions sx={{ justifyContent: "left" }}>
+              <IconButton aria-label="comment" onClick={handleComment}>
+                <CommentIcon />
+                <Box paddingLeft={1} paddingRight={1}>
+                  <Typography>
+                    {PostCard.comments.length} comments
                   </Typography>
                 </Box>
-                <Box display="flex" paddingLeft={2.5}>
-                  <Typography variant="body2" color="text.secondary" align='left'>
-                    {PostCard.postText}
-                  </Typography>
-                </Box>
-                <CardActions sx={{ justifyContent: "left" }}>
-                  <IconButton aria-label="comment">
-                    <CommentIcon />
-                    <Box paddingLeft={1} paddingRight={1} >
-                      <Typography >
-                        {PostCard.comments.length} comments
-                      </Typography>
-                    </Box>
-                  </IconButton>
-                </CardActions>
-              </CardContent>
-            </Card>
-          </Box>
-        ))
-      }
-    </>
+              </IconButton>
+            </CardActions>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
   );
 }
 
-export default PostCards
+export default PostCards;
