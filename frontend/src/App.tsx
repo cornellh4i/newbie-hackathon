@@ -1,5 +1,5 @@
-import React from 'react';
-import logo from './logo.svg';
+// import React from 'react';
+// import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/Navbar';
 import PostButton from './components/PostButton';
@@ -11,7 +11,7 @@ import FilterMenu from "./components/FilterMenu";
 import "./components/FilterMenu.css";
 import PostCard from './components/PostCard';
 import ViewPostPage from './pages/VIewPostPage'
-
+import CommentsPage from './pages/CommentsPage';
 
 function App() {
   return (

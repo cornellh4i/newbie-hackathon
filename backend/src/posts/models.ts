@@ -1,7 +1,7 @@
 // Models here, mirroring those from ../customers/models.ts
 import mongoose, { model, Schema, Model, Document } from 'mongoose';
 
-interface IPost extends Document {
+export interface IPost extends Document {
   title: string,
   postText: string,
   comments: string[],
@@ -21,6 +21,4 @@ const PostSchema: Schema = new Schema({
 
 const Post = model('Post', PostSchema);
 
-export default Post;
-
-export { IPost };
+export type { Post };

@@ -14,15 +14,39 @@ export default function CreatePostPage() {
   const [title, setTitle] = useState('');
   const [postText, setPostText] = useState('');
   const [course, setCourse] = useState('');
-
   const navigate = useNavigate();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!title || !postText || !course) {
       window.alert('Please fill in all fields');
       return;
     }
     navigate('/');
+
+    const baseURL = "http://localhost:8000/posts/addpost"
+
+    try {
+      const reqbody = {
+        "title": title,
+        "postText": postText,
+        "comments": ["hey"],
+        "upvotes": 0,
+        "course": course,
+        "id": ""
+      }
+      console.log("before")
+      const response = await fetch(baseURL, {
+        body: JSON.stringify(reqbody),
+        headers: { "Content-type": "application/json" },
+        method: "POST"
+      })
+
+    }
+    catch (error) {
+      console.log(error)
+      throw new Error(" Error")
+    }
+
   };
 
   return (

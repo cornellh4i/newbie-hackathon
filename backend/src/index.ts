@@ -8,6 +8,8 @@ import spec from "../api-spec.json";
 import { dbConnect } from "./database";
 
 const app = express();
+const cors = require('cors');
+app.use(cors({ origin: 'http://localhost:3000' }));
 
 // Middleware to parse json request bodies
 app.use(bodyParser.json());
@@ -18,16 +20,17 @@ app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(spec));
  */
 app.use("/posts", postRouter);
 
-/**
- * Some dummy routes to illustrate express syntax
- */
-app.get("/", function (req, res) {
-  res.send("Hello World!");
-});
 
-app.post("/", (req, res) => {
-  res.send(req.body);
-});
+// /**
+//  * Some dummy routes to illustrate express syntax
+//  */
+// app.get("/", function (req, res) {
+//   res.send("Hello World!");
+// });
+
+// app.post("/", (req, res) => {
+//   res.send(req.body);
+// });
 
 app.listen(process.env.PORT || 8000, async () => {
   console.log("✅ Server is up and running");
