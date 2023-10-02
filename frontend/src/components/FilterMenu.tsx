@@ -10,7 +10,12 @@ import FilterCollege from "../components/FilterCollege";
 import FilterToggle from "../components/FilterToggle";
 import "./FilterMenu.css";
 
-function FilterMenu() {
+interface Props {
+  filter: string;
+  setFilter: React.Dispatch<React.SetStateAction<string>>
+}
+
+function FilterMenu({ filter, setFilter }: Props) {
   const collegeLabels = [
     "AAP",
     "ILR",
@@ -35,6 +40,8 @@ function FilterMenu() {
           heading={"Search Posts"}
           label={"Search"}
           options={[{ title: "Example Post (default sorted by most recent)" }]}
+          filterOpt={filter}
+          setFilter={setFilter}
         />
         <FilterSearch
           heading={"Course"}
@@ -47,6 +54,8 @@ function FilterMenu() {
             { title: "CS 3410" },
             { title: "CS 4820" },
           ]}
+          filterOpt={filter}
+          setFilter={setFilter}
         />
 
         <FilterCollege heading={"College"} labels={collegeLabels} />
