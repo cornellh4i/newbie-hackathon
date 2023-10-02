@@ -20,7 +20,7 @@ function App() {
         <Routes>
           <Route index element={<HomePage />} />
           <Route path='/createpost' element={<CreatePostPage />} />
-          <Route path='/viewpost' element={<ViewPostPage />} />
+          <Route path='/comments' element={<ViewPostPage />} />
         </Routes>
       </BrowserRouter>
       <link
