@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage';
 import FilterMenu from "./components/FilterMenu";
 import "./components/FilterMenu.css";
 import PostCard from './components/PostCard';
+import ViewPostPage from './pages/VIewPostPage'
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route index element={<HomePage />} />
           <Route path='/createpost' element={<CreatePostPage />} />
+          <Route path='/viewpost' element={<ViewPostPage />} />
         </Routes>
       </BrowserRouter>
       <link
