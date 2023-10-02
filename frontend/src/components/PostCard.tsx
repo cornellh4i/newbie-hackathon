@@ -12,38 +12,24 @@ import postRouter from '../../../backend/src/posts/views';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const PostCards = () => {
+interface Props {
+  postCards: {
+    title: string;
+    postText: string;
+    comments: never[];
+    upvotes: number;
+    course: string;
+}[]
+}
+
+
+const PostCards = ({ postCards }: Props) => {
 
   const navigate = useNavigate();
-  const [postCards, setPosts] = useState([
-    {
-      "title": "",
-      "postText": '',
-      "comments": [],
-      "upvotes": 0,
-      "course": ''
-    }
-  ]);
 
   const handleComment = async () => {
     navigate('/comments');
   };
-
-  useEffect(() => {
-    const get_all_posts = async () => {
-      const baseURL = `http://localhost:8000/posts/all`
-      try {
-        console.log('before fetch')
-        const response = await fetch(baseURL, { headers: { "Content-type": "application/json" }, method: "GET" })
-        const all_posts = await response.json()
-        setPosts(all_posts.data);
-      }
-      catch (err) {
-        throw new Error(`Unknown Error`)
-      }
-    }
-    get_all_posts()
-  }, []);
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>

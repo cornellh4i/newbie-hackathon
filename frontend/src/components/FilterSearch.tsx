@@ -9,6 +9,8 @@ interface Props {
   heading: string;
   label: string;
   options: readonly OptionType[];
+  filterOpt: string;
+  setFilter: React.Dispatch<React.SetStateAction<string>>;
 }
 
 interface OptionType {
@@ -16,8 +18,9 @@ interface OptionType {
   title: string;
 }
 
-function FilterSearch({ heading, label, options }: Props) {
+function FilterSearch({ heading, label, options, filterOpt, setFilter }: Props) {
   const [value, setValue] = React.useState<OptionType | null>(null);
+
 
   return (
     <Autocomplete
@@ -27,14 +30,23 @@ function FilterSearch({ heading, label, options }: Props) {
           setValue({
             title: newValue,
           });
+          setFilter(prev => newValue)
         } else if (newValue && newValue.inputValue) {
           // Create a new value from the user input
+          setFilter(prev => newValue.title)
           setValue({
             title: newValue.inputValue,
           });
         } else {
           setValue(newValue);
+          if (newValue != null) {
+            setFilter(newValue.title)
+          }
+          
         }
+        console.log(value?.inputValue!)
+        console.log(value?.title!)
+        
       }}
       filterOptions={(options, params) => {
         const filtered = filter(options, params);
@@ -75,23 +87,14 @@ function FilterSearch({ heading, label, options }: Props) {
       freeSolo
       renderInput={(params) => (
         <div className="search-container">
-          <h3 className="section-header">{heading}</h3>
+          <h3 className="search-header">{heading}</h3>
           <TextField
             {...params}
             label={label}
             sx={{
-              "& .MuiOutlinedInput-root": {
-                backgroundColor: "#EFEFEF",
-                margin: "0 0 16px 0",
-                padding: "12px 24px 12px 24px",
+              "& .MuiInputBase-root-MuiOutlinedInput-root": {
+                borderColor: "red",
               },
-              "& .MuiAutocomplete-root": {
-                width: "313px",
-              },
-              "& .MuiAutocomplete-root .MuiOutlinedInput-root .MuiAutocomplete-input":
-                {
-                  padding: "0px 0px 0px 0px",
-                },
             }}
           >
             TODO: insert search symbol
